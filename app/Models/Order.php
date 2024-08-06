@@ -46,7 +46,7 @@ class Order extends Model
             )
             ->get($orderFilter);
 
-        foreach($orders as $order) {
+        foreach ($orders as $order) {
             $this->data[] = [
                 'id' => $order->id(),
                 'amount_excluding_vat' => $order->amount(),
