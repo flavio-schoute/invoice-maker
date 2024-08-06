@@ -35,4 +35,7 @@ return [
         ],
     ],
 
+    'plug_and_pay' => [
+        'api_key' => env('PLUG_AND_PAY_API_KEY'),
+    ],
 ];
