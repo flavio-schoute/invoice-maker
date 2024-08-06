@@ -4,17 +4,13 @@ namespace App\Jobs;
 
 use App\Models\Customer;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use PlugAndPay\Sdk\Enum\InvoiceStatus;
 use PlugAndPay\Sdk\Enum\Mode;
 use PlugAndPay\Sdk\Enum\OrderIncludes;
 use PlugAndPay\Sdk\Enum\PaymentStatus;
 use PlugAndPay\Sdk\Filters\OrderFilter;
 use PlugAndPay\Sdk\Service\Client;
-use PlugAndPay\Sdk\Service\OrderPaymentService;
 use PlugAndPay\Sdk\Service\OrderService;
 
 class ProcessPaymentInformationJob implements ShouldQueue

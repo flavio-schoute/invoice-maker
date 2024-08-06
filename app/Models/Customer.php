@@ -14,7 +14,7 @@ class Customer extends Model
         'full_name',
         'email',
         'address',
-        'user_id'
+        'user_id',
     ];
 
     public function user(): BelongsTo

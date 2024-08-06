@@ -3,10 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
-use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
-use BladeUI\Icons\Components\Icon;
-use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,8 +14,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\Indicator;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Carbon;
 use Okeonline\FilamentArchivable\Tables\Actions\ArchiveAction;
 use Okeonline\FilamentArchivable\Tables\Actions\UnArchiveAction;
@@ -46,7 +41,7 @@ class OrderResource extends Resource
          * Naam
          * Email
          * Product
-         * Bedrag
+         * Bedrag.
          *
          * Claim knop
          */
@@ -100,7 +95,7 @@ class OrderResource extends Resource
                         DatePicker::make('filter_from'),
 
                         DatePicker::make('filter_unti')
-                            ->default(Carbon::now())
+                            ->default(Carbon::now()),
                     ])
                     ->indicateUsing(function (array $data): array {
                         $indicators = [];
@@ -116,7 +111,7 @@ class OrderResource extends Resource
                         }
 
                         return $indicators;
-                    })
+                    }),
             ])
             ->actions([
                 BulkActionGroup::make([

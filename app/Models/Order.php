@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Http;
 use LaravelArchivable\Archivable;
 use PlugAndPay\Sdk\Enum\InvoiceStatus;
 use PlugAndPay\Sdk\Enum\Mode;
@@ -25,7 +24,6 @@ class Order extends Model
 
     public function getRows(): array
     {
-
         $client = new Client(
             secretToken: config('services.plug_and_pay.api_key')
         );
@@ -62,6 +60,6 @@ class Order extends Model
     protected $schema = [
         'id' => 'integer',
         'amount_excluding_vat' => 'float',
-        'archived_at' => 'timestamp'
+        'archived_at' => 'timestamp',
     ];
 }
