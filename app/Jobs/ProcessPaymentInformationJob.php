@@ -53,15 +53,17 @@ class ProcessPaymentInformationJob implements ShouldQueue
             )
             ->get($orderFilter);
 
-        foreach($orders as $order) {
-            // dd($order->billing()->contact()->firstName());
+        // dd($orders);
 
-            Customer::query()->create([
-                'full_name' => $order->billing()->contact()->firstName(),
-                'address' => 'test',
-                'email' => $order->billing()->contact()->email(),
-                'user_id' => 1
-            ]);
-        }
+        // foreach($orders as $order) {
+        //     // dd($order->billing()->contact()->firstName());
+
+        //     Customer::query()->create([
+        //         'full_name' => $order->billing()->contact()->firstName(),
+        //         'address' => 'test',
+        //         'email' => $order->billing()->contact()->email(),
+        //         'user_id' => 1
+        //     ]);
+        // }
     }
 }

@@ -50,9 +50,11 @@ class OrderResource extends Resource
          *
          * Claim knop
          */
-        return $table
-            ->columns([
 
+        // Sushi data ophalen -> Display -> Claim -> Insert database
+        return $table
+            ->query(Order::query())
+            ->columns([
                 IconColumn::make('is_claimed_by_sales_rep')
                     ->label('Claimed by closer')
                     ->boolean()

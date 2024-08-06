@@ -24,7 +24,7 @@ return new class () extends Migration {
             $table->double('amount_excluding_vat');
             $table->double('amount_including_vat');
 
-            $table->archivedAt();
+            $table->timestamp('archived_at')->nullable();
 
             $table->timestamps();
         });
