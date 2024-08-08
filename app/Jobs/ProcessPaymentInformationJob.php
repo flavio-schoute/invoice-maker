@@ -49,7 +49,7 @@ class ProcessPaymentInformationJob implements ShouldQueue
             )
             ->get($orderFilter);
 
-        // dd($orders);
+        dd($orders);
 
         // foreach($orders as $order) {
         //     // dd($order->billing()->contact()->firstName());
