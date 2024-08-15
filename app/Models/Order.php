@@ -71,7 +71,7 @@ class Order extends Model
                 OrderIncludes::ITEMS,
                 OrderIncludes::PAYMENT,
                 OrderIncludes::TAXES,
-                OrderIncludes::CUSTOM_FIELDS,
+                // OrderIncludes::CUSTOM_FIELDS,
             )
             ->get($orderFilter);
 
@@ -92,4 +92,16 @@ class Order extends Model
 
         return $this->data;
     }
+
+    // //Allow result to be cached
+    // protected function sushiShouldCache()
+    // {
+    //     return true;
+    // }
+
+    // //rebuild cache whenever this file is updated
+    // protected function sushiCacheReferencePath()
+    // {
+    //     return public_path() . '/fixtures/continents.json';
+    // }
 }

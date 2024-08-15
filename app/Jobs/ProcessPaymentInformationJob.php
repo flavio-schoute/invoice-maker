@@ -17,14 +17,7 @@ class ProcessPaymentInformationJob implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
+    // TODO For testing purposes, remove once finished
     public function handle(): void
     {
         $client = new Client(
@@ -49,7 +42,7 @@ class ProcessPaymentInformationJob implements ShouldQueue
             )
             ->get($orderFilter);
 
-        dd($orders);
+        // dd($orders);
 
         // foreach($orders as $order) {
         //     // dd($order->billing()->contact()->firstName());

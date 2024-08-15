@@ -4,11 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
+use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\Indicator;
@@ -43,10 +46,10 @@ class OrderResource extends Resource
         return $table
             ->query(Order::query())
             ->columns([
-                IconColumn::make('is_claimed_by_sales_rep')
-                    ->label('Claimed by closer')
-                    ->boolean()
-                    ->sortable(),
+                // IconColumn::make('is_claimed_by_sales_rep')
+                //     ->label('Claimed by closer')
+                //     ->boolean()
+                //     ->sortable(),
 
                 TextColumn::make('invoice_number')
                     ->label('Factuurnummer')
@@ -78,9 +81,9 @@ class OrderResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('test'),
-
-                // Select column for closer en setter
+                SelectColumn::make('closer')
+                    ->options(User::query()->pluck('name', 'id'))
+                    ->rules(['required']),
             ])
             ->filters([
                 Filter::make('Periode')
@@ -119,7 +122,7 @@ class OrderResource extends Resource
                                 OrderIncludes::ITEMS,
                                 OrderIncludes::PAYMENT,
                                 OrderIncludes::TAXES,
-                                OrderIncludes::CUSTOM_FIELDS,
+                                // OrderIncludes::CUSTOM_FIELDS,
                             )
                             ->get($orderFilter);
 
@@ -127,7 +130,6 @@ class OrderResource extends Resource
                             $fullName = $order->billing()->contact()->firstName() . $order->billing()->contact()->lastName();
 
                             // Todo: Loop over items because an order can sometimes contain more than 1 item
-
                             $result[] = [
                                 'id' => $order->id(),
                                 'invoice_number' => $order->invoiceNumber(),
@@ -139,9 +141,9 @@ class OrderResource extends Resource
                             ];
                         }
 
-                        var_dump($result);
+                        // var_dump($result);
 
-                        return Order::loadData($result);
+                        Order::loadData($result);
                     })
                     ->indicateUsing(function (array $data): array {
                         $indicators = [];
@@ -162,7 +164,11 @@ class OrderResource extends Resource
                     }),
             ])
             ->actions([
-                //
+                Action::make('claim')
+                    ->label('Claim')
+                    ->action(function (array $data, Order $order): void {
+                        $order->save();
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
